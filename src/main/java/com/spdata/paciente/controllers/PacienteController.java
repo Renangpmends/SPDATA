@@ -1,26 +1,43 @@
 package com.spdata.paciente.controllers;
 
 import java.util.List;
-
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.spdata.paciente.entities.Paciente;
-import com.spdata.paciente.repositories.PacienteRepository;
+import com.spdata.paciente.services.PacienteService;
 
 @RestController
 @RequestMapping(value = "/pacientes")
 public class PacienteController {
 
 	@Autowired
-	private PacienteRepository repository;
+	private PacienteService service;
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<Paciente> findAll(){
-		List<Paciente> result = repository.findAll();
+		List<Paciente> result = service.listAll();
 		return result;
 	};  
+	
+	@GetMapping("{id}")
+	public Paciente findById(@PathVariable(name = "id") Long id){
+		return service.selecionar(id);
+	}; 
+	
+	@PostMapping
+	public void salvar(@RequestBody Paciente paciente){
+		service.save(paciente);
+	};  
+	
+	@DeleteMapping("{id}")
+	public void deletePaciente(@PathVariable(name = "id") Long id){
+		service.deletar(id);
+	};  
+	
 }
