@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "paciente")
+@Table(name = "paciente", schema = "spdata")
 public class Paciente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,8 @@ public class Paciente {
 	private String nome;
 	private String cpf;
 	private Date dataNascimento;
-	private String sexo;
-	private String gestante;
+	private TipoSexo sexo;
+	private Gestante gestante;
 	
 	
 	public long getId() {
@@ -44,16 +44,16 @@ public class Paciente {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public String getSexo() {
+	public TipoSexo getSexo() {
 		return sexo;
 	}
-	public void setSexo(String sexo) {
+	public void setSexo(TipoSexo sexo) {
 		this.sexo = sexo;
 	}
-	public String getGestante() {
+	public Gestante getGestante() {
 		return gestante;
 	}
-	public void setGestante(String gestante) {
+	public void setGestante(Gestante gestante) {
 		this.gestante = gestante;
 	}
 }

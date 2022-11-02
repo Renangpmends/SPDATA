@@ -14,8 +14,8 @@ public class PacienteService {
 		return repository.findAll();
 	}
 	
-	public void save(Paciente paciente) {
-		repository.save(paciente);
+	public Paciente save(Paciente paciente) {
+		return repository.save(paciente);
 	}
 	
 	public Paciente selecionar(long id) {
